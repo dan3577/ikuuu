@@ -32,3 +32,9 @@ jobs:
         TZ: 'Asia/Shanghai'
         IKUUU_EMAIL: ${{ secrets.IKUUU_EMAIL }}
         IKUUU_PASSWORD: ${{ secrets.IKUUU_PASSWORD }}
+
+    - name: Send notification
+      if: failure()
+      run: |
+         curl -X POST "https://www.pushplus.plus/send" \
+         -d "message=签到失败，请检查日志"
